@@ -17,6 +17,7 @@ fn part_one(filename: &str) {
                 Some(digit) => {
                     if first == -1 {
                         first = digit as i32;
+                        last = first;
                     } else {
                         last = digit as i32;
                     }
@@ -25,11 +26,7 @@ fn part_one(filename: &str) {
             }
         }
 
-        if last != -1 {
-            result += first * 10 + last;
-        } else {
-            result += first * 10 + first;
-        }
+        result += first * 10 + last;
     }
 
     println!("{}", result);

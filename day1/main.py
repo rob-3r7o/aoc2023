@@ -10,16 +10,13 @@ def part_one():
         for letter in line:
             try:
                 if first == -1:
-                    first = int(letter)
+                    first = last = int(letter)
                 else:
                     last = int(letter)
             except:
                 continue
 
-        if last != -1:
-            result += int(str(first) + str(last))
-        else:
-            result += int(str(first) + str(first))
+        result += int(str(first) + str(last))
 
     print(result)
 
@@ -28,7 +25,6 @@ def part_two():
     f = open("data/data.txt", "r")
 
     numbers_dic = {
-        "zero": "zero0zero",
         "one": "one1one",
         "two": "two2two",
         "three": "three3three",
