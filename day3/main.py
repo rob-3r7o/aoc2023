@@ -14,7 +14,6 @@ def part_one(file):
 
         for j in range(len(line)):
             letter = line[j]
-            # print("\t", letter)
 
             if is_num(letter):
                 res = has_symbol_near(f, i, j)
@@ -23,7 +22,6 @@ def part_one(file):
                     n = find_all_number(f, i, j)
                     result += n
                     number_done = True
-                    # print(f"{letter}: true")
                     if res[1]:
                         coord = res[2]
                         if coord in gears:
@@ -126,18 +124,14 @@ def find_all_number(file, line, letter):
         str_num = str_num + str(file[line][x])
         x += 1
 
-    # print(f"number found: {str_num}")
     return int(str_num)
 
 
 def is_num(x):
-    # print(f"{x} is num? ", end="")
     try:
         _ = int(x)
-        # print("true")
         return True
     except:
-        # print("false")
         return False
 
 
