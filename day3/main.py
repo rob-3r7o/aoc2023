@@ -2,9 +2,7 @@ gears = {}
 
 
 def part_one(file):
-    f = open(file, "r")
-    f = f.read()
-    f = f.splitlines()
+    f = open(file, "r").read().splitlines()
 
     result = 0
     number_done = False
@@ -15,19 +13,22 @@ def part_one(file):
         for j in range(len(line)):
             letter = line[j]
 
-            if is_num(letter):
+            if letter.isdigit():
                 res = has_symbol_near(f, i, j)
 
                 if res[0] and not number_done:
                     n = find_all_number(f, i, j)
                     result += n
                     number_done = True
+
                     if res[1]:
                         coord = res[2]
+
                         if coord in gears:
                             gears[coord].append(n)
                         else:
                             gears[coord] = [n]
+
             else:
                 number_done = False
 
@@ -115,24 +116,16 @@ def find_all_number(file, line, letter):
     str_num = ""
 
     x = letter
-    while x >= 0 and is_num(file[line][x]):
+    while x >= 0 and file[line][x].isdigit():
         str_num = str(file[line][x]) + str_num
         x -= 1
 
     x = letter + 1
-    while x <= max_letter and is_num(file[line][x]):
+    while x <= max_letter and file[line][x].isdigit():
         str_num = str_num + str(file[line][x])
         x += 1
 
     return int(str_num)
-
-
-def is_num(x):
-    try:
-        _ = int(x)
-        return True
-    except:
-        return False
 
 
 def part_two():
