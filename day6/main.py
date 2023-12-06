@@ -1,3 +1,7 @@
+from functools import reduce
+from operator import add
+
+
 def part_one(file):
     f = open(file, "r").read().splitlines()
 
@@ -25,8 +29,22 @@ def part_one(file):
 
 
 def part_two(file):
-    None
+    f = open(file, "r").read().splitlines()
+
+    time = int(reduce(add, f[0].split()[1:]))
+    record = int(reduce(add, f[1].split()[1:]))
+
+    ways = 0
+
+    for btn_time in range(1, time):
+        race_time = time - btn_time
+        distace_traveled = btn_time * race_time
+
+        if distace_traveled > record:
+            ways += 1
+
+    print(ways)
 
 
 part_one("data/data.txt")
-# part_two("data/data.txt")
+part_two("data/data.txt")
