@@ -2,20 +2,7 @@ y = 0
 x = 1
 
 
-def part_one(file):
-    f = open(file, "r").read()
-
-    matrix = list(map(lambda row: list(row), f.splitlines()))
-
-    steps = 0
-    curr_pos = [0, 0]
-    prev_pos = [0, 0]
-
-    for yy in range(len(matrix)):
-        for xx in range(len(matrix[y])):
-            if matrix[yy][xx] == "S":
-                curr_pos = prev_pos = [yy, xx]
-
+def find_second_step(matrix, curr_pos):
     for yy in range(-1, 2, 1):
         for xx in range(-1, 2, 1):
             curr_char = matrix[curr_pos[y] + yy][curr_pos[x] + xx]
@@ -80,8 +67,24 @@ def part_one(file):
         else:
             continue
 
-        curr_pos = [curr_pos[y] + yy, curr_pos[x] + xx]
-        break
+        return [curr_pos[y] + yy, curr_pos[x] + xx]
+
+
+def part_one(file):
+    f = open(file, "r").read()
+
+    matrix = list(map(lambda row: list(row), f.splitlines()))
+
+    steps = 0
+    curr_pos = [0, 0]
+    prev_pos = [0, 0]
+
+    for yy in range(len(matrix)):
+        for xx in range(len(matrix[y])):
+            if matrix[yy][xx] == "S":
+                curr_pos = prev_pos = [yy, xx]
+
+    curr_pos = find_second_step(matrix, curr_pos)
 
     while True:
         steps += 1
